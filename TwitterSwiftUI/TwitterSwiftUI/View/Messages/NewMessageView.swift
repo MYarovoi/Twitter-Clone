@@ -28,7 +28,8 @@ struct NewMessageView: View {
 
                 }
             }
-        }    }
+        }
+    }
 }
 
 #Preview {

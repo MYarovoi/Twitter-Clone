@@ -17,7 +17,11 @@ struct SearchView: View {
             
             VStack(spacing: 14) {
                 ForEach (0 ..< 2) { _ in
-                    UserCell()
+                    NavigationLink {
+                        UserProfileView()
+                    } label: {
+                        UserCell()
+                    }
                 }
             }
         }
