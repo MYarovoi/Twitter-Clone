@@ -16,6 +16,7 @@ struct RegistrationView: View {
     @State var selectedUIImage: UIImage?
     @State var image: Image?
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var viewModel: AuthViewModel
     
     func loadImage() {
         guard let selectedUIImage = selectedUIImage else { return }
@@ -69,7 +70,7 @@ struct RegistrationView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .foregroundStyle(.white)
                     
-                    CustomTextField(text: $username, placeholder: "Username", imageName: "")
+                    CustomTextField(text: $username, placeholder: "Username", imageName: "pencil")
                         .padding()
                         .background(Color(.init(white: 1, alpha: 0.15)))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -84,7 +85,9 @@ struct RegistrationView: View {
                 .padding(.horizontal, 32)
                 
                 Button {
+//                    guard let image = selectedUIImage else { return }
                     
+                    viewModel.registerUser(email: email, password: password, username: username, fullName: fullName)
                 } label: {
                     Text("Sign Up")
                         .font(.headline)

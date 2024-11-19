@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @State var email = ""
     @State var password = ""
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
         NavigationStack {
@@ -54,7 +55,7 @@ struct LoginView: View {
                     }
                     
                     Button {
-                        
+                        viewModel.login(withEmail: email, password: password)
                     } label: {
                         Text("Sign In")
                             .font(.headline)
