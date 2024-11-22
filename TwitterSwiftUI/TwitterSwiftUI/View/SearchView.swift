@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     @State var searchText: String = ""
+    @ObservedObject var viewModel = SearchViewModel()
     
     var body: some View {
         ScrollView {
@@ -16,11 +17,11 @@ struct SearchView: View {
                 .padding()
             
             VStack(spacing: 14) {
-                ForEach (0 ..< 2) { _ in
+                ForEach (viewModel.users) { user in
                     NavigationLink {
-                        UserProfileView()
+                        UserProfileView(user: user)
                     } label: {
-                        UserCell()
+                        UserCell(user: user)
                     }
                 }
             }

@@ -78,8 +78,8 @@ class AuthViewModel: ObservableObject {
         guard let uid = userSession?.uid else { return }
         Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
             do {
-                let user = try snapshot?.data(as: User.self)
-                print("DEBUG: User is \(user?.username)")
+                guard let user = try snapshot?.data(as: User.self) else { return }
+                print("DEBUG: User is \(user.username)")
                 
             } catch {
                 print("DEBUG: Error fetching user: \(error.localizedDescription)")
