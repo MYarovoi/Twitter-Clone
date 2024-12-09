@@ -22,7 +22,7 @@ class ProfileViewModel: ObservableObject {
         let followingRef = COLLECTION_FOLLOWING.document(currentUid).collection("user-following")
         let followersRef = COLLECTION_FOLLOWERS.document(user.id).collection("user-followers")
         
-        followersRef.document(user.id).setData([:]) { _ in
+        followingRef.document(user.id).setData([:]) { _ in
             followersRef.document(currentUid).setData([:]) { _ in
                 self.isFollowed = true
             }

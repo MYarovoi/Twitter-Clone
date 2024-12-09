@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+//import Kingfisher
 
 struct NewTweetView: View {
     @Binding var isPresented: Bool
     @State var captionText: String = ""
+    @ObservedObject var viewModel: UploadTweetViewModel
+    
+    init(isPresented: Binding<Bool>) {
+        self._isPresented = isPresented
+        self.viewModel = UploadTweetViewModel(isPressented: isPresented)
+    }
     
     var body: some View {
         NavigationStack {
@@ -20,6 +27,14 @@ struct NewTweetView: View {
                         .scaledToFill()
                         .frame(width: 64, height: 64)
                         .clipShape(Circle())
+                    
+//                    if let user = AuthViewModel.shared.user {
+//                        KFImage(URL(string: user.profileImageURL))
+//                            .resizable()
+//                            .scaledToFill()
+//                            .frame(width: 64, height: 64)
+//                            .clipShape(Circle())
+//                    }
                     
                     TextArea("What's happening?", text: $captionText)
                     
@@ -36,7 +51,7 @@ struct NewTweetView: View {
                         }),
                     trailing:
                         Button(action: {
-                            
+                            viewModel.uploadTweet(caption: captionText)
                         }, label: {
                             Text("Tweet")
                                 .padding(.horizontal)

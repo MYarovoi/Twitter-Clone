@@ -23,8 +23,8 @@ struct UserProfileView: View {
                     .padding()
                 
                 ForEach(0..<9) { tweet in
-                    TweetCell()
-                        .padding(.horizontal, 36)
+//                    TweetCell()
+//                        .padding(.horizontal, 36)
                 }
             }
             .navigationTitle("@batman")

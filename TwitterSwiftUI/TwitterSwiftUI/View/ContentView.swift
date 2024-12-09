@@ -34,6 +34,21 @@ struct ContentView: View {
                             }
                     }
                     .navigationTitle("Home")
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button {
+                                viewModel.signOut()
+                            } label: {
+                                Image(systemName: "rectangle.portrait.and.arrow.forward")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .clipped()
+                                    .frame(width: 28, height: 28)
+                                    .padding(.leading)
+                            }
+
+                        }
+                    }
                     .navigationBarTitleDisplayMode(.inline)
                 }
             } else {

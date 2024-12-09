@@ -16,6 +16,8 @@ class AuthViewModel: ObservableObject {
     @Published var error: Error?
     @Published var user: User?
     
+    static let shared = AuthViewModel()
+    
     init() {
         userSession = Auth.auth().currentUser
         fetchUser()
@@ -26,9 +28,9 @@ class AuthViewModel: ObservableObject {
             if let error = error {
                 print("DEBUG: Error logIn user: \(error.localizedDescription)")
                 return
-                
-                self.userSession = result?.user
             }
+            self.userSession = result?.user
+            self.fetchUser()
         }
     }
     
@@ -66,11 +68,13 @@ class AuthViewModel: ObservableObject {
             
             Firestore.firestore().collection("users").document(user.uid).setData(data) { _ in
                 self.userSession = user
+                self.fetchUser()
             }
         }
     }
     func signOut() {
         userSession = nil
+        user = nil
         try? Auth.auth().signOut()
     }
     
@@ -79,6 +83,7 @@ class AuthViewModel: ObservableObject {
         Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
             do {
                 guard let user = try snapshot?.data(as: User.self) else { return }
+                self.user = user
                 print("DEBUG: User is \(user.username)")
                 
             } catch {
