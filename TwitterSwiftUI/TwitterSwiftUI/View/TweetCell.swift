@@ -25,6 +25,7 @@ struct TweetCell: View {
                     HStack {
                         Text(tweet.fullname)
                             .font(.system(size: 14, weight: .semibold))
+                            .foregroundStyle(.black)
                         
                         Text("@\(tweet.username) ·")
                             .foregroundStyle(.gray)
@@ -33,52 +34,13 @@ struct TweetCell: View {
                             .foregroundStyle(.gray)
                     }
                     Text(tweet.caption)
+                        .foregroundStyle(.black)
                 }
             }
             .padding(.bottom)
             .padding(.trailing)
             
-            HStack {
-                Button {
-                    
-                } label: {
-                    Image(systemName: "bubble.left")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
-                }
-                
-                Spacer()
-
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.2.squarepath")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
-                }
-                
-                Spacer()
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "heart")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
-                }
-                
-                Spacer()
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "bookmark")
-                        .font(.system(size: 16))
-                        .frame(width: 32, height: 32)
-                }
-            }
-            .padding(.horizontal)
-            .foregroundStyle(.gray)
+            TweetActionsView(tweet: tweet)
             
             Divider()
         }
