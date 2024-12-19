@@ -64,7 +64,8 @@ class AuthViewModel: ObservableObject {
                         "username": username.lowercased(),
                         "fullName": fullName,
                         //                                "profileImageURL": profileImageURL,
-                        "id": user.uid]
+                        "id": user.uid,
+                        "isFollowed": false]
             
             Firestore.firestore().collection("users").document(user.uid).setData(data) { _ in
                 self.userSession = user

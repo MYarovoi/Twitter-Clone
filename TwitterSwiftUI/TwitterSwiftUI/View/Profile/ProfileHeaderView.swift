@@ -10,8 +10,7 @@ import SwiftUI
 
 struct ProfileHeaderView: View {
     @State var selectedFilter: TweetFilterOptions = .tweets
-    @Binding var isFollowed: Bool
-    let viewModel: ProfileViewModel
+    @ObservedObject var viewModel: ProfileViewModel
     
     var body: some View {
         VStack {
@@ -38,7 +37,7 @@ struct ProfileHeaderView: View {
                 
             HStack(spacing: 40) {
                 VStack {
-                    Text("12")
+                    Text("\(viewModel.user.stats?.followers ?? 0)")
                         .font(.system(size: 16, weight: .bold))
                     
                     Text("Followers")
@@ -47,7 +46,7 @@ struct ProfileHeaderView: View {
                 }
                 
                 VStack {
-                    Text("12")
+                    Text("\(viewModel.user.stats?.following ?? 0)")
                         .font(.system(size: 16, weight: .bold))
                     
                     Text("Following")
@@ -57,10 +56,7 @@ struct ProfileHeaderView: View {
             }
             .padding()
             
-            ProfileActionButtonView(viewModel: viewModel, isFollowed: $isFollowed)
-            
-            FilterButtonView(selectedOption: $selectedFilter)
-                .padding()
+            ProfileActionButtonView(viewModel: viewModel)
             
             Spacer()
         }

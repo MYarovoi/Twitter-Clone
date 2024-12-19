@@ -14,9 +14,16 @@ struct User: Identifiable, Codable {
 //    let profileImageUrl: String
     let fullName: String
     let email: String
+    var stats: UserStats?
+    var isFollowed = false
     
     var isCurrentUser: Bool {
         guard let currentUid = Auth.auth().currentUser?.uid else { return false }
         return currentUid == id
     }
+}
+
+struct UserStats: Codable {
+    let followers: Int
+    let following: Int
 }
