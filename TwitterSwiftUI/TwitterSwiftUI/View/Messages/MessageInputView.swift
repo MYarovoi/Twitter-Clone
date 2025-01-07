@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MessageInputView: View {
     @Binding var messageText: String
+    var action: () -> Void
     
     var body: some View {
         HStack {
@@ -17,15 +18,11 @@ struct MessageInputView: View {
                 .frame(minHeight: 30)
             
             Button {
-                
+                action()
             } label: {
                 Text("Send")
             }
 
         }
     }
-}
-
-#Preview {
-    MessageInputView(messageText: .constant("message"))
 }

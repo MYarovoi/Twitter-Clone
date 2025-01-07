@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct ConversationCell: View {
+    let message: Message
+    
     var body: some View {
         VStack {
             HStack(spacing: 12) {
-                Image("batman")
+                Image(systemName: "person")
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
                     .frame(width: 56, height: 56)
                     .clipShape(Circle())
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("batman")
+                    Text(message.user.fullName)
                         .font(.system(size: 14))
                         .fontWeight(.semibold)
                     
-                    Text("Longer message text to see what happens when I do this...")
+                    Text(message.text)
                         .font(.system(size: 14))
                         .foregroundStyle(.gray)
                 }
@@ -32,8 +34,4 @@ struct ConversationCell: View {
             Divider()
         }
     }
-}
-
-#Preview {
-    ConversationCell()
 }
